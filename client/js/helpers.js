@@ -1,5 +1,9 @@
 var Helpers = (function () {
-  var helpers = {};
+  var module = {};
 
-  return helpers;
+  module.log = function(message) {
+  	document.body.innerText = document.body.innerText + message + '\n';
+  }
+
+  return module;
 }());
