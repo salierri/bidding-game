@@ -3,18 +3,27 @@ var main = (function ($) {
 
   module.init = function() {
     Helpers.log('Started client');
-    request('game/new', 0, {}, function(data) {
-      Helpers.log('Player1: ' + JSON.stringify(data));
+    request('game/new', 0, {}, function (data) {
+      Helpers.log('Player1: ' + data.name);
+    });
+
+    request('game/bid', 0, { standings: Game.personalStandings(0) }, function (data) {
+      Helpers.log('Player1 bid: ' + data.amount);
     });
   }
 
   function request(url, playerId, body, callback) {
-    Helpers.log(config.players[playerId].url + url);
-    $.post(config.players[playerId].url + url, body)
-      .done(callback)
-      .fail(function(data, data2, data3) {
-        Helpers.log('Fail: ' + JSON.stringify(data) + JSON.stringify(data2) + JSON.stringify(data3));
-      });
+    $.ajax({
+      url: config.players[playerId].url + url,
+      type: 'POST',
+      data: JSON.stringify(body),
+      contentType: 'application/json',
+      dataType: 'json',
+      success: callback,
+      error: function (data) {
+        Helpers.log('Request failed, url: ' + config.players[playerId].url + url + ', data: ' + JSON.stringify(data));
+      }
+    });
   }
 
   return module;
