@@ -33,7 +33,11 @@ var Game = (function () {
   module.play = function (bids) {
     standings.coins[0] += bids[1] - bids[0];
     standings.coins[1] += bids[0] - bids[1];
-    bids[0] < bids[1] ? standings[trophies][0]++ ? standings[trophies][1]++;
+    bids[0] < bids[1] ? standings.trophies[0]++ : standings.trophies[1]++;
+  }
+
+  module.standings = function () {
+    return standings;    
   }
 
   return module;

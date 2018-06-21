@@ -2,7 +2,8 @@ var Helpers = (function () {
   var module = {};
 
   module.log = function(message) {
-  	document.body.innerText = document.body.innerText + message + '\n';
+    var entry = $('<p>').text(message);
+    $('#logger').append(entry);
   }
 
   return module;

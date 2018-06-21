@@ -1,23 +1,39 @@
-var main = (function ($) {
+var Main = (function ($) {
   var module = {};
 
   var names = [];
+  var bidStore = [];
 
-  module.init = function() {
+  module.init = function () {
     Helpers.log('Started client');
     Game.init();
-    request('game/new', 0, {}, function (data) {
-      names[0] = data.name;
-      Helpers.log('Player1: ' + data.name);
-    });
+    requestName(0);
+    requestName(1);
+  }
 
-    request('game/bid', 0, { standings: Game.personalStandings(0) }, function (data) {
+  module.stepGame = function () {
+    $.when(requestBid(0), requestBid(1)).then(function () {
+      Game.play(bidStore);
+      Renderer.render(Game.standings());
+    });
+  }
+
+  function requestBid (playerId) {
+    return request('game/bid', playerId, { standings: Game.personalStandings(playerId) }, function (data) {
       Helpers.log(names[0] + ' bid: ' + data.amount);
+      bidStore[playerId] = data.amount;
+    });
+  }
+
+  function requestName (playerId) {
+    request('game/new', playerId, {}, function (data) {
+      names[playerId] = data.name;
+      Helpers.log('Player' + playerId + ': ' + data.name);
     });
   }
 
   function request(url, playerId, body, callback) {
-    $.ajax({
+    return $.ajax({
       url: config.players[playerId].url + url,
       type: 'POST',
       data: JSON.stringify(body),
@@ -32,5 +48,3 @@ var main = (function ($) {
 
   return module;
 }(jQuery));
-
-$(document).ready(main.init)
