@@ -9,8 +9,7 @@ var Main = (function ($) {
     Game.init();
 
     $.when(requestName(0), requestName(1)).then(function () {
-      Renderer.printNames(names);
-      Renderer.renderStandings(Game.standings());
+      Renderer.renderStandings(Game.standings(), names);
     });
   }
 
@@ -19,8 +18,8 @@ var Main = (function ($) {
     $.when(requestBid(0), requestBid(1)).then(function () {
       setTimeout(function () {
         Game.play(bidStore);
-        Renderer.renderStandings(Game.standings());
-      }, 3000);
+        Renderer.renderStandings(Game.standings(), names);
+      }, config.waitAfterBid);
     });
   }
 

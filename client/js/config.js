@@ -1,6 +1,8 @@
 var config = {
   startingCoins: 100,
-  winningTreshold: 5,
+  winningTreshold: 1,
+
+  waitAfterBid: 3000,
 
   players: [ {
     url: 'http://localhost:8001/'

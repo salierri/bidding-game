@@ -6,28 +6,33 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div class="col-centered">
+  <div class="centered">
     <button class="btn btn-lg btn-primary" onclick="Main.init()">Start game</button>
     <button class="btn btn-lg btn-primary" onclick="Main.stepGame()">Step game</button>
   </div>
   <div class="container">
     <div class="row">
-      <div class="col col-centered">
-        <div>
-          
+      <div class="col centered">
+        <div id="trophies0" class="trophy-container centered">
         </div>
-        <h1 id="name0" class="text-center">Name1</h1>
+        <h1 id="name0" class="text-center"></h1>
         <h2 id="coin0" class="text-center"></h2>
-        <h2 id="bid0" class="text-center text-danger"></h2>
+        <h2 id="bid0" class="text-center text-primary"></h2>
       </div>
-      <div class="col col-centered">
-        <h1 id="name1" class="text-center">Name2</h1>
+      <div class="col centered">
+        <div id="trophies1" class="trophy-container centered">
+        </div>
+        <h1 id="name1" class="text-center"></h1>
         <h2 id="coin1" class="text-center"></h2>
-        <h2 id="bid1" class="text-center text-danger"></h2>
+        <h2 id="bid1" class="text-center text-primary"></h2>
       </div>
     </div>
   </div>
+  <div id="victory-alert" class="alert alert-success hidden">
+    Király csapat 1 nyert!
+  </div>
   <div id="logger"></div>
+  <img src="img/trophy.png" height="42" class="hidden" id="trophy">
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/config.js"></script>
