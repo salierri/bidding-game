@@ -35,8 +35,16 @@ var Game = (function () {
   module.play = function (bids) {
     standings.coins[0] += bids[1] - bids[0];
     standings.coins[1] += bids[0] - bids[1];
-    bids[0] > bids[1] ? standings.trophies[0]++ : standings.trophies[1]++;
+    checkTrophie(0, bids);
+    checkTrophie(1, bids);
     checkVictory();
+  }
+
+  function checkTrophie(player, bids) {
+    var other = 1 - player;
+    if(bids[player] > bids[other] || (bids[player] == bids[other] && standings.coins[player] > standings.coins[other])) {
+      standings.trophies[player]++;
+    }
   }
 
   function checkVictory() {
