@@ -20,3 +20,15 @@
 	font-size: 60px;
 	text-align: center;
 }
+
+#logger {
+	position: absolute;
+	top: 70%;
+	height: 30%;
+	min-width: 45%;
+	overflow: scroll;
+}
+
+.log-entry {
+	margin: 0px;
+}

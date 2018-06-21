@@ -2,7 +2,6 @@ var Renderer = (function () {
   var module = {};
 
   module.renderStandings = function (standings, names) {
-    Helpers.log(JSON.stringify(standings));
     printNames(names);
     gradually('bid0', 0);
     gradually('bid1', 0);
@@ -23,7 +22,6 @@ var Renderer = (function () {
   }
 
   function printNames(names) {
-    Helpers.log(JSON.stringify(names));
     simply('name0', names[0]);
     simply('name1', names[1]);
   }

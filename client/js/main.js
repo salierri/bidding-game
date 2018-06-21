@@ -14,10 +14,12 @@ var Main = (function ($) {
   }
 
   module.stepGame = function () {
+    Helpers.log('Stepping game');
     Renderer.resetBids();
     $.when(requestBid(0), requestBid(1)).then(function () {
       setTimeout(function () {
         Game.play(bidStore);
+        Helpers.log('Game state: ' + JSON.stringify(Game.standings()));
         Renderer.renderStandings(Game.standings(), names);
       }, config.waitAfterBid);
     });
@@ -25,7 +27,7 @@ var Main = (function ($) {
 
   function requestBid (playerId) {
     return request('game/bid', playerId, { standings: Game.personalStandings(playerId) }, function (data) {
-      Helpers.log(names[0] + ' bid: ' + data.amount);
+      Helpers.log('Player ' + playerId + ' (' + names[0] + ') bid: ' + data.amount);
       Renderer.renderBid(playerId, data.amount);
       bidStore[playerId] = data.amount;
     });
@@ -34,7 +36,7 @@ var Main = (function ($) {
   function requestName (playerId) {
     return request('game/new', playerId, {}, function (data) {
       names[playerId] = data.name;
-      Helpers.log('Player' + playerId + ': ' + data.name);
+      Helpers.log('Player' + playerId + ' name : ' + data.name);
     });
   }
 
