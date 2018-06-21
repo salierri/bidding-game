@@ -1,14 +1,18 @@
 var main = (function ($) {
   var module = {};
 
+  var names = [];
+
   module.init = function() {
     Helpers.log('Started client');
+    Game.init();
     request('game/new', 0, {}, function (data) {
+      names[0] = data.name;
       Helpers.log('Player1: ' + data.name);
     });
 
     request('game/bid', 0, { standings: Game.personalStandings(0) }, function (data) {
-      Helpers.log('Player1 bid: ' + data.amount);
+      Helpers.log(names[0] + ' bid: ' + data.amount);
     });
   }
 
@@ -21,7 +25,7 @@ var main = (function ($) {
       dataType: 'json',
       success: callback,
       error: function (data) {
-        Helpers.log('Request failed, url: ' + config.players[playerId].url + url + ', data: ' + JSON.stringify(data));
+        Helpers.log('Request failed, url: ' + config.players[playerId].url + url + ', details: ' + JSON.stringify(data));
       }
     });
   }
