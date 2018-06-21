@@ -1,20 +1,39 @@
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Kir-Dev nyáritábor 2018</title>
+  <meta charset="UTF-8">
+  <title>Kir-Dev nyáritábor 2018</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	<div>
-		<button onclick="Main.init()">Start game</button>
-		<button onclick="Main.stepGame()">Step game</button>
-	</div>
-	<div id="logger"></div>
+  <div class="col-centered">
+    <button class="btn btn-lg btn-primary" onclick="Main.init()">Start game</button>
+    <button class="btn btn-lg btn-primary" onclick="Main.stepGame()">Step game</button>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col col-centered">
+        <div>
+          
+        </div>
+        <h1 id="name0" class="text-center">Name1</h1>
+        <h2 id="coin0" class="text-center"></h2>
+        <h2 id="bid0" class="text-center text-danger"></h2>
+      </div>
+      <div class="col col-centered">
+        <h1 id="name1" class="text-center">Name2</h1>
+        <h2 id="coin1" class="text-center"></h2>
+        <h2 id="bid1" class="text-center text-danger"></h2>
+      </div>
+    </div>
+  </div>
+  <div id="logger"></div>
 
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/config.js"></script>
-	<script src="js/helpers.js"></script>
-	<script src="js/game.js"></script>
-	<script src="js/renderer.js"></script>
-	<script src="js/main.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

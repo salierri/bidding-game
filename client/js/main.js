@@ -7,26 +7,33 @@ var Main = (function ($) {
   module.init = function () {
     Helpers.log('Started client');
     Game.init();
-    requestName(0);
-    requestName(1);
+
+    $.when(requestName(0), requestName(1)).then(function () {
+      Renderer.printNames(names);
+      Renderer.renderStandings(Game.standings());
+    });
   }
 
   module.stepGame = function () {
+    Renderer.resetBids();
     $.when(requestBid(0), requestBid(1)).then(function () {
-      Game.play(bidStore);
-      Renderer.render(Game.standings());
+      setTimeout(function () {
+        Game.play(bidStore);
+        Renderer.renderStandings(Game.standings());
+      }, 3000);
     });
   }
 
   function requestBid (playerId) {
     return request('game/bid', playerId, { standings: Game.personalStandings(playerId) }, function (data) {
       Helpers.log(names[0] + ' bid: ' + data.amount);
+      Renderer.renderBid(playerId, data.amount);
       bidStore[playerId] = data.amount;
     });
   }
 
   function requestName (playerId) {
-    request('game/new', playerId, {}, function (data) {
+    return request('game/new', playerId, {}, function (data) {
       names[playerId] = data.name;
       Helpers.log('Player' + playerId + ': ' + data.name);
     });
