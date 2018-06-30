@@ -27,7 +27,7 @@ var Main = (function ($) {
 
   function requestBid (playerId) {
     return request('game/bid', playerId, { standings: Game.personalStandings(playerId) }, function (data) {
-      Helpers.log('Player ' + playerId + ' (' + names[0] + ') bid: ' + data.amount);
+      Helpers.log('Player ' + playerId + ' (' + names[0] + ') bid: ' + Math.floor(data.amount));
       Renderer.renderBid(playerId, data.amount);
       bidStore[playerId] = data.amount;
     });
