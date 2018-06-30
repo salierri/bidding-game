@@ -1,6 +1,6 @@
 var config = {
   startingCoins: 100,
-  winningTreshold: 1,
+  winningTreshold: 5,
 
   waitAfterBid: 3000,
 
