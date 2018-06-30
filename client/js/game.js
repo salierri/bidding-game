@@ -33,6 +33,8 @@ var Game = (function () {
   }
 
   module.play = function (bids) {
+    checkCheating(0, bids);
+    checkCheating(1, bids);
     standings.coins[0] += bids[1] - bids[0];
     standings.coins[1] += bids[0] - bids[1];
     checkTrophie(0, bids);
@@ -53,6 +55,13 @@ var Game = (function () {
     }
     else if(standings.trophies[1] >= config.winningTreshold) {
       standings.winner = 1;
+    }
+  }
+
+  function checkCheating(player, bids) {
+    var other = 1 - player;
+    if(bids[player] > standings.coins[player] || bids[player] < 0) {
+      Helpers.log('Player ' + player + ' is possibly cheating!');
     }
   }
 
